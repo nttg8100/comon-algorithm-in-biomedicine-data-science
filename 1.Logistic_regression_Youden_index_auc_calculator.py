@@ -13,7 +13,7 @@ import sys
 
 # Data directory
 file = sys.argv[1]
-
+path = sys.argv[2]
 df = pd.read_csv(file)
 
 features = df.columns.drop("target").tolist()
@@ -60,4 +60,4 @@ for i in features:
     print(cut_off)
     models = models.append(cut_off.to_dict(), ignore_index=True)
 
-models.to_csv("models_youden_j.csv", index=False)
+models.to_csv(path+"/models_youden_j.csv", index=False)
