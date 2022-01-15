@@ -1,9 +1,13 @@
 # Load library
+from sklearn import datasets
 from sklearn.pipeline import make_pipeline
 import numpy as np
 import pandas as pd
+import scipy.stats as sps
 from sklearn import linear_model
+from sklearn.metrics import roc_curve, RocCurveDisplay, auc
 from sklearn.model_selection import train_test_split
+import matplotlib.pyplot as plt
 
 import sys
 
@@ -16,7 +20,7 @@ features = df.columns.drop("target").tolist()
 
 models = pd.DataFrame(
     columns=['x', 'y', 'proba', 'tpr', 'fpr', 'youden_j', 'model_name'])
-# Perform models and its evaluations
+
 for i in features:
     print("Calculating using single variable with the features:", i)
     X_train, X_test, y_train, y_test = train_test_split(
