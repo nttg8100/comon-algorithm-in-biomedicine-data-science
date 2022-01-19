@@ -10,5 +10,6 @@ ncol=$(awk 'NR==1{print NF}' "$infile")
 ((inc < ncol)) || { echo -e "\nSplit size >= number of columns\n\n"; exit; }
 
 for((i=0, start=1, end=$inc; i < ncol/inc + 1; i++, start+=inc, end+=inc)); do
-  cut -f$start-$end "$infile" > "${infile}.$i"
+  name=`basename $infile .tsv`
+  cut -f1,$start-$end "$infile" > "${i}_${name}.tsv"
 done
